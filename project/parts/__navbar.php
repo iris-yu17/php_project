@@ -1,3 +1,9 @@
+<?php
+// 如果page_name沒設定，用空字串
+if (!isset($page_name)) $page_name = '';
+?>
+
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -7,31 +13,45 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <!-- page_name=data_list的時候active，否則空字串 -->
+                <li class="nav-item <?= $page_name == 'data_list' ? 'active' : '' ?>">
+                    <!-- link to data_list -->
+                    <a class="nav-link" href="<?= WEB_ROOT ?>/project/01.member_list.php">會員資料 <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+
+                <li class="nav-item <?= $page_name == 'data_insert' ? 'active' : '' ?>">
+                    <!-- link to data_insert -->
+                    <a class="nav-link" href="<?= WEB_ROOT ?>/project/03.member_data_insert.php">新增會員資料</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
+
+                <li class="nav-item <?= $page_name == 'data_list' ? 'active' : '' ?>">
+                    <!-- link to data_list -->
+                    <a class="nav-link" href="<?= WEB_ROOT ?>/project/01.coupon_info.php">折價券資料 <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+
+                <li class="nav-item <?= $page_name == 'data_insert' ? 'active' : '' ?>">
+                    <!-- link to data_insert -->
+                    <a class="nav-link" href="<?= WEB_ROOT ?>/project/03.coupon_info_insert.php">新增折價券</a>
                 </li>
+
+                <li class="nav-item <?= $page_name == 'data_list' ? 'active' : '' ?>">
+                    <!-- link to data_list -->
+                    <a class="nav-link" href="<?= WEB_ROOT ?>/project/01.coupon_record.php">折價券紀錄 <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item <?= $page_name == 'data_insert' ? 'active' : '' ?>">
+                    <!-- link to data_insert -->
+                    <a class="nav-link" href="<?= WEB_ROOT ?>/project/03.coupon_record_insert.php">新增折價券紀錄</a>
+                </li>
+
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
         </div>
     </div>
 </nav>
+
+<style>
+    /* .navbar .nav-item.active {
+        background-color: #7abaff;
+        border-radius: 10px;
+    } */
+</style>

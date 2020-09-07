@@ -51,8 +51,12 @@ if ($totalRows > 0) {
                         </a>
                     </li>
 
-                    <!-- 用for loop做分頁數 -->
-                    <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                    <!-- 分頁只秀前後3頁 -->
+                    <?php for ($i = $page - 3; $i <= $page + 3; $i++) :
+                        // 若i<1: 跳過  i>1: 離開
+                        if ($i < 1) continue;
+                        if ($i > $totalPages) break;
+                    ?>
 
                         <!-- class="active" 會反白 -->
                         <li class="page-item <?= $i == $page ? 'active' : '' ?>">

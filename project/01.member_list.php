@@ -10,7 +10,7 @@ $perPage = 5; //每頁有幾筆
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 // 總筆數
-$t_sql = "SELECT COUNT(*) FROM `coupon_info`";
+$t_sql = "SELECT COUNT(*) FROM `member_list`";
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
 
 // 總頁數
@@ -27,7 +27,7 @@ if ($totalRows > 0) {
 
     // %s(從第幾筆)，%s(取幾筆)
     // 第一頁從0-4，第二頁5-9，第三頁10-14...
-    $sql = sprintf("SELECT * FROM `coupon_info` LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+    $sql = sprintf("SELECT * FROM `member_list` LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
     // 執行
     $stmt = $pdo->query($sql);
     // 拿出來
@@ -51,8 +51,12 @@ if ($totalRows > 0) {
                         </a>
                     </li>
 
-                    <!-- 用for loop做分頁數 -->
-                    <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                    <!-- 分頁只秀前後3頁 -->
+                    <?php for ($i = $page - 3; $i <= $page + 3; $i++) :
+                        // 若i<1: 跳過  i>1: 離開
+                        if ($i < 1) continue;
+                        if ($i > $totalPages) break;
+                    ?>
 
                         <!-- class="active" 會反白 -->
                         <li class="page-item <?= $i == $page ? 'active' : '' ?>">
@@ -77,12 +81,18 @@ if ($totalRows > 0) {
             <tr>
                 <th scope="col"><i class="fas fa-trash-alt"></i></th>
                 <th scope="col">#</th>
-                <th scope="col">coupon_no</th>
-                <th scope="col">coupon_type</th>
-                <th scope="col">coupon_issue</th>
-                <th scope="col">coupon_due</th>
-                <th scope="col">coupon_validity</th>
-                <th scope="col">user_account</th>
+                <th scope="col">account</th>
+                <th scope="col">password</th>
+                <th scope="col">family_name</th>
+                <th scope="col">given_name</th>
+                <th scope="col">birthday</th>
+                <th scope="col">mobile</th>
+                <th scope="col">email</th>
+                <th scope="col">district</th>
+                <th scope="col">address</th>
+                <th scope="col">created_at</th>
+                <th scope="col">activated</th>
+                <th scope="col">point</th>
             </tr>
         </thead>
         <tbody>
@@ -90,13 +100,19 @@ if ($totalRows > 0) {
             <?php foreach ($rows as $r) : ?>
                 <tr>
                     <td><a href="javascript:"><i class="fas fa-trash-alt"></i></a></td>
-                    <td><?= $r['coupon_id'] ?></td>
-                    <td><?= $r['coupon_no'] ?></td>
-                    <td><?= $r['coupon_type'] ?></td>
-                    <td><?= $r['coupon_issue'] ?></td>
-                    <td><?= $r['coupon_due'] ?></td>
-                    <td><?= $r['coupon_validity'] ?></td>
-                    <td><?= $r['user_account'] ?></td>
+                    <td><?= $r['sid'] ?></td>
+                    <td><?= $r['account'] ?></td>
+                    <td><?= $r['password'] ?></td>
+                    <td><?= $r['family_name'] ?></td>
+                    <td><?= $r['given_name'] ?></td>
+                    <td><?= $r['birthday'] ?></td>
+                    <td><?= $r['mobile'] ?></td>
+                    <td><?= $r['email'] ?></td>
+                    <td><?= $r['district'] ?></td>
+                    <td><?= $r['address'] ?></td>
+                    <td><?= $r['created_at'] ?></td>
+                    <td><?= $r['activated'] ?></td>
+                    <td><?= $r['point'] ?></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
