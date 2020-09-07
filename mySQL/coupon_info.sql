@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2020-09-06 16:45:55
+-- 產生時間： 2020-09-07 17:56:25
 -- 伺服器版本： 10.4.13-MariaDB
 -- PHP 版本： 7.3.20
 
@@ -42,7 +42,13 @@ CREATE TABLE `coupon_info` (
 --
 
 INSERT INTO `coupon_info` (`coupon_id`, `coupon_no`, `coupon_type`, `coupon_issue`, `coupon_due`, `coupon_validity`, `user_account`) VALUES
-(1, 'A0001', 5, '2020-09-02 23:08:28', '2020-10-02 23:05:57', 1, 'kate1234');
+(1, 'A0001', 5, '2020-09-02 23:08:28', '2020-10-02 23:05:57', 1, 'kate1234'),
+(2, 'A0002', 4, '2020-09-07 21:40:33', '2020-10-07 21:40:33', 1, 'adam1234'),
+(3, 'A0003', 3, '2020-09-07 21:40:33', '2020-10-07 21:40:33', 1, 'adam1234'),
+(4, 'A0004', 2, '2020-09-07 21:40:33', '2020-10-07 21:40:33', 1, 'kate1234'),
+(5, 'A0005', 1, '2020-09-07 21:40:33', '2020-10-07 21:40:33', 1, 'shane1234'),
+(6, 'A0006', 2, '2020-09-07 21:40:33', '2020-10-07 21:40:33', 1, 'shane1234'),
+(7, 'A0007', 1, '2020-09-07 23:42:00', '2020-10-07 23:42:00', 1, 'arron1234');
 
 --
 -- 已傾印資料表的索引
@@ -63,7 +69,7 @@ ALTER TABLE `coupon_info`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `coupon_info`
 --
 ALTER TABLE `coupon_info`
-  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自動增加ID', AUTO_INCREMENT=2;
+  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自動增加ID', AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

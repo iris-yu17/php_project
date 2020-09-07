@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2020-09-06 16:46:19
+-- 產生時間： 2020-09-07 17:56:36
 -- 伺服器版本： 10.4.13-MariaDB
 -- PHP 版本： 7.3.20
 
@@ -42,7 +42,8 @@ CREATE TABLE `coupon_record` (
 --
 
 INSERT INTO `coupon_record` (`sid`, `user_account`, `order_number`, `order_original_amount`, `discount_type`, `order_final_amount`, `status`) VALUES
-(1, 'kate1234', 'S0001', 200, 5, 100, 1);
+(1, 'kate1234', 'S0001', 200, 5, 100, 1),
+(2, 'shane1234', 'S0002', 300, 5, 250, 1);
 
 --
 -- 已傾印資料表的索引
@@ -62,7 +63,7 @@ ALTER TABLE `coupon_record`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `coupon_record`
 --
 ALTER TABLE `coupon_record`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT COMMENT '自動增加ID', AUTO_INCREMENT=2;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT COMMENT '自動增加ID', AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
