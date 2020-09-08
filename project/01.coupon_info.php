@@ -2,7 +2,7 @@
 $page_title = '資料列表';
 require __DIR__ . '/parts/__.connect_db.php';
 
-$perPage = 1; //每頁有幾筆
+$perPage = 5; //每頁有幾筆
 
 // 用戶要看第幾頁
 // 有設定就用，沒有設定就用1(第一頁)
@@ -52,11 +52,11 @@ if ($totalRows > 0) {
                     </li>
 
                     <!-- 分頁只秀前後3頁 -->
-                    <?php for ($i = $page-3; $i <= $page+3; $i++) :
-                    // 若i<1: 跳過  i>1: 離開
-                        if($i<1) continue;
-                        if($i>$totalPages) break;
-                        ?>
+                    <?php for ($i = $page - 3; $i <= $page + 3; $i++) :
+                        // 若i<1: 跳過  i>1: 離開
+                        if ($i < 1) continue;
+                        if ($i > $totalPages) break;
+                    ?>
 
                         <!-- class="active" 會反白 -->
                         <li class="page-item <?= $i == $page ? 'active' : '' ?>">
@@ -87,20 +87,23 @@ if ($totalRows > 0) {
                 <th scope="col">coupon_due</th>
                 <th scope="col">coupon_validity</th>
                 <th scope="col">user_account</th>
+                <th scope="col"><i class="fas fa-edit"></i></th>
             </tr>
         </thead>
         <tbody>
             <!-- foreach(要查看的對象 as $key => $value) -->
             <?php foreach ($rows as $r) : ?>
                 <tr>
-                    <td><a href="javascript:"><i class="fas fa-trash-alt"></i></a></td>
-                    <td><?= $r['coupon_id'] ?></td>
+                    <!-- 按刪除連到04.data_delete.php -->
+                    <td><a href="04.coupon_info_delete.php?sid=<?= $r['sid']  ?>"><i class="fas fa-trash-alt"></i></a></td>
+                    <td><?= $r['sid'] ?></td>
                     <td><?= $r['coupon_no'] ?></td>
                     <td><?= $r['coupon_type'] ?></td>
                     <td><?= $r['coupon_issue'] ?></td>
                     <td><?= $r['coupon_due'] ?></td>
                     <td><?= $r['coupon_validity'] ?></td>
                     <td><?= $r['user_account'] ?></td>
+                    <td><a href="#"><i class="fas fa-edit"></i></a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

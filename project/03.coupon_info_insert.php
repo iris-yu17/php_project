@@ -19,12 +19,12 @@ require __DIR__ . '/parts/__.connect_db.php';
                             <!-- label的for是對應input的id -->
                             <!-- 沒有name就不會送出 -->
                             <label for="coupon_no">coupon_no</label>
-                            <input type="text" class="form-control" id="coupon_no" name="coupon_no">
+                            <input type="text" class="form-control" id="coupon_no" name="coupon_no" required>
                         </div>
 
                         <div class="form-group">
                             <label for="coupon_type">coupon_type</label>
-                            <input type="text" class="form-control" id="coupon_type" name="coupon_type">
+                            <input type="text" class="form-control" id="coupon_type" name="coupon_type" required>
                         </div>
 
                         <div class="form-group">
@@ -34,7 +34,7 @@ require __DIR__ . '/parts/__.connect_db.php';
 
                         <div class="form-group">
                             <label for="user_account">user_account</label>
-                            <input type="text" class="form-control" id="user_account" name="user_account">
+                            <input type="text" class="form-control" id="user_account" name="user_account" required>
                         </div>
 
 

@@ -93,13 +93,15 @@ if ($totalRows > 0) {
                 <th scope="col">created_at</th>
                 <th scope="col">activated</th>
                 <th scope="col">point</th>
+                <th scope="col"><i class="fas fa-edit"></i></th>
             </tr>
         </thead>
         <tbody>
             <!-- foreach(要查看的對象 as $key => $value) -->
             <?php foreach ($rows as $r) : ?>
                 <tr>
-                    <td><a href="javascript:"><i class="fas fa-trash-alt"></i></a></td>
+                    <!-- 按刪除連到04.member_delete.php -->
+                    <td><a href="04.member_delete.php?sid=<?= $r['sid']  ?>"><i class="fas fa-trash-alt"></i></a></td>
                     <td><?= $r['sid'] ?></td>
                     <td><?= $r['account'] ?></td>
                     <td><?= $r['password'] ?></td>
@@ -113,6 +115,8 @@ if ($totalRows > 0) {
                     <td><?= $r['created_at'] ?></td>
                     <td><?= $r['activated'] ?></td>
                     <td><?= $r['point'] ?></td>
+                    <!-- edit: 給primary值 -->
+                    <td><a href="05.member_edit.php?sid=<?= $r['sid']  ?>"><i class="fas fa-edit"></i></a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

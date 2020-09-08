@@ -87,13 +87,15 @@ if ($totalRows > 0) {
                 <th scope="col">discount_type</th>
                 <th scope="col">order_final_amount</th>
                 <th scope="col">status</th>
+                <th scope="col"><i class="fas fa-edit"></i></th>
             </tr>
         </thead>
         <tbody>
             <!-- foreach(要查看的對象 as $key => $value) -->
             <?php foreach ($rows as $r) : ?>
                 <tr>
-                    <td><a href="javascript:"><i class="fas fa-trash-alt"></i></a></td>
+                <!-- 按刪除連到04.data_delete.php -->
+                <td><a href="04.coupon_record_delete.php?sid=<?= $r['sid']  ?>"><i class="fas fa-trash-alt"></i></a></td>
                     <td><?= $r['sid'] ?></td>
                     <td><?= $r['user_account'] ?></td>
                     <td><?= $r['order_number'] ?></td>
@@ -101,6 +103,7 @@ if ($totalRows > 0) {
                     <td><?= $r['discount_type'] ?></td>
                     <td><?= $r['order_final_amount'] ?></td>
                     <td><?= $r['status'] ?></td>
+                    <td><a href="#"><i class="fas fa-edit"></i></a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
