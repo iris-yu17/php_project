@@ -47,7 +47,7 @@ $stmt = $pdo->prepare($sql);
 // 執行
 $stmt->execute([
     $_POST['account'],
-    $_POST['password'],
+    sha1($_POST['password']),
     $_POST['family_name'],
     $_POST['given_name'],
     $_POST['birthday'],

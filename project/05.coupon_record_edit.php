@@ -1,5 +1,5 @@
 <?php
-$page_title = '編輯優惠券紀錄';
+$page_title = '編輯折價券紀錄';
 $page_name = 'coupon_record_edit';
 require __DIR__ . '/parts/__.connect_db.php';
 
@@ -10,18 +10,18 @@ $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 // 如果是0就不做了，轉到01.member_list.php
 // empty()，若是0,"",[],會拿到true
 if (empty($sid)) {
-    header('Location: 01.member_list.php');
+    header('Location: 01.coupon_record.php');
     exit;
 }
 
 // 直接把$sid值放進來(前面intval已轉成數字)
-$sql = "SELECT * FROM member_list WHERE sid=$sid";
+$sql = "SELECT * FROM coupon_record WHERE sid=$sid";
 
 $row = $pdo->query($sql)->fetch();
 
 // 如果是空的就不做了，轉到01.member_list.php
 if (empty($row)) {
-    header('Location: 01.member_list.php');
+    header('Location: 01.coupon_record.php');
     exit;
 }
 
@@ -52,7 +52,7 @@ if (empty($row)) {
 
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">編輯資料</h5>
+                    <h5 class="card-title">編輯折價券紀錄</h5>
 
                     <!-- return flase送不出去 -->
                     <form name="form1" onsubmit="checkForm(); return false;" novalidate>
@@ -60,68 +60,39 @@ if (empty($row)) {
                         <div class="form-group">
                             <!-- label的for是對應input的id -->
                             <!-- 沒有name就不會送出 -->
-                            <label for="account"><span class="red-stars">**</span>account</label>
-                            <input type="text" class="form-control" id="account" name="account" required value="<?= htmlentities($row['account']) ?>">
+                            <label for="user_account"><span class="red-stars">**</span>user_account</label>
+                            <input type="text" class="form-control" id="user_account" name="user_account" required value="<?= htmlentities($row['user_account']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
-                            <label for="password"><span class="red-stars">**</span>password</label>
-                            <input type="password" class="form-control" id="password" name="password" required value="<?= htmlentities($row['password']) ?>">
+                            <label for="order_number"><span class="red-stars">**</span>order_number</label>
+                            <input type="text" class="form-control" id="order_number" name="order_number" value="<?= htmlentities($row['order_number']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
-                            <label for="family_name"><span class="red-stars">**</span>family_name</label>
-                            <input type="text" class="form-control" id="family_name" name="family_name" required value="<?= htmlentities($row['family_name']) ?>">
+                            <label for="order_original_amount"><span class="red-stars">**</span>order_original_amount</label>
+                            <input type="text" class="form-control" id="order_original_amount" name="order_original_amount" value="<?= htmlentities($row['order_original_amount']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
-                            <label for="given_name"><span class="red-stars">**</span>given_name</label>
-                            <input type="text" class="form-control" id="given_name" name="given_name" required value="<?= htmlentities($row['given_name']) ?>">
+                            <label for="discount_type"><span class="red-stars">**</span>discount_type</label>
+                            <input type="text" class="form-control" id="discount_type" name="discount_type" value="<?= htmlentities($row['discount_type']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
-                            <label for="birthday">birthday</label>
-                            <input type="date" class="form-control" id="birthday" name="birthday" value="<?= htmlentities($row['birthday']) ?>">
+                            <label for="order_final_amount">order_final_amount</label>
+                            <input type="text" class="form-control" id="order_final_amount" name="order_final_amount" value="<?= htmlentities($row['order_final_amount']) ?>">
                         </div>
 
                         <div class="form-group">
-                            <label for="mobile"><span class="red-stars">**</span>mobile</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile" required value="<?= htmlentities($row['mobile']) ?>">
+                            <label for="status"><span class="red-stars">**</span>status</label>
+                            <input type="text" class="form-control" id="status" name="status" value="<?= htmlentities($row['status']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
-
-                        <div class="form-group">
-                            <label for="email">email</label>
-                            <input type="text" class="form-control" id="email" name="email" value="<?= htmlentities($row['email']) ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="district"><span class="red-stars">**</span>district</label>
-                            <input type="text" class="form-control" id="district" name="district" required value="<?= htmlentities($row['district']) ?>">
-                            <small class="form-text error-msg"></small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="address">address</label>
-                            <input type="text" class="form-control" id="address" name="address" value="<?= htmlentities($row['address']) ?>">
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="activated">activated</label>
-                            <input type="text" class="form-control" id="activated" name="activated" value="<?= htmlentities($row['activated']) ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="point">point</label>
-                            <input type="text" class="form-control" id="point" name="point" value="<?= htmlentities($row['point']) ?>">
-                        </div>
-
-
 
 
 
@@ -141,10 +112,10 @@ if (empty($row)) {
 <?php include __DIR__ . '/parts/__scripts.php' ?>
 <script>
     // 正確格式
-    const mobile_pattern = /^09\d{2}-?\d{3}-?\d{3}$/;
-    const $account = document.querySelector('#account');
-    const $mobile = document.querySelector('#mobile');
-    const r_fields = [$account, $mobile];
+    // const discount_type_pattern = /^09\d{2}-?\d{3}-?\d{3}$/;
+    const $user_account = document.querySelector('#user_account');
+    // const $discount_type = document.querySelector('#discount_type');
+    const r_fields = [$user_account];
     const infobar = document.querySelector('#infobar');
 
 
@@ -159,17 +130,18 @@ if (empty($row)) {
         });
 
         // 檢查資料格式
-        if ($account.value.length < 8) {
+        if ($user_account.value.length < 8) {
             isPass = false;
-            $account.style.borderColor = 'red';
-            $account.nextElementSibling.innerHTML = '帳號需大於8碼';
+            $user_account.style.borderColor = 'red';
+            $user_account.nextElementSibling.innerHTML = 'user account大於8碼';
         }
-
-        if (!mobile_pattern.test($mobile.value)) {
+/*
+        if (!discount_type_pattern.test($discount_type.value)) {
             isPass = false;
-            $mobile.style.borderColor = 'red';
-            $mobile.nextElementSibling.innerHTML = '請填寫正確的手機號碼';
+            $discount_type.style.borderColor = 'red';
+            $discount_type.nextElementSibling.innerHTML = '請填寫正確的手機號碼';
         }
+*/
 
 
 
@@ -179,7 +151,7 @@ if (empty($row)) {
             const fd = new FormData(document.form1);
 
             // 發給02.member_data_insert_api.php
-            fetch('06.member_data_edit_api.php', {
+            fetch('06.coupon_record_edit_api.php', {
                     method: 'POST',
                     // body是要送的資料
                     body: fd
@@ -199,15 +171,15 @@ if (empty($row)) {
                 .then(obj => {
                     console.log(obj);
                     if (obj.success) {
-                        infobar.innerHTML = '新增成功';
+                        infobar.innerHTML = '編輯成功';
                         if (infobar.classList.contains('alert-danger')) {
                             infobar.classList.replace('alert-danger', 'alert-success')
                         }
                         setTimeout(() => {
-                            location.href = '01.member_list.php';
+                            location.href = '01.coupon_record.php';
                         }, 3000)
                     } else {
-                        infobar.innerHTML = obj.error || '新增失敗';
+                        infobar.innerHTML = obj.error || '編輯失敗';
                         if (infobar.classList.contains('alert-success')) {
                             infobar.classList.replace('alert-success', 'alert-danger')
                         }

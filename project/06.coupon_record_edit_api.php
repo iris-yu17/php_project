@@ -22,36 +22,32 @@ if(empty($_POST['sid'])){
 }
 
 // 檢查格式
-if(mb_strlen($_POST['account'])<8){
+if(mb_strlen($_POST['user_account'])<8){
     $output['code'] = 410;
-    $output['error'] = '帳號長度要大於8';
+    $output['error'] = 'user account長度要大於8';
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
     //出錯了就不往下進行，EXIT
     exit;
 }
 
-
+/*
 if(! preg_match('/^09\d{2}-?\d{3}-?\d{3}$/', $_POST['mobile'])){
     $output['code'] = 420;
     $output['error'] = '手機號碼格式錯誤';
     echo json_encode($output, JSON_UNESCAPED_UNICODE);
     exit;
 }
+*/
 
 
 // sid不可改，用來判斷，放where
-$sql = "UPDATE `member_list` SET 
-`account`=?,
-`password`=?,
-`family_name`=?,
-`given_name`=?,
-`birthday`=?,
-`mobile`=?,
-`email`=?,
-`district`=?,
-`address`=?,
-`activated`=?,
-`point`=? 
+$sql = "UPDATE `coupon_record` SET 
+`user_account`=?,
+`order_number`=?,
+`order_original_amount`=?,
+`discount_type`=?,
+`order_final_amount`=?,
+`status`=?
 WHERE `sid`=?";
 
 // PREPARE準備
@@ -59,17 +55,12 @@ WHERE `sid`=?";
 $stmt = $pdo->prepare($sql);
 // 執行
 $stmt->execute([
-    $_POST['account'],
-    $_POST['password'],
-    $_POST['family_name'],
-    $_POST['given_name'],
-    $_POST['birthday'],
-    $_POST['mobile'],
-    $_POST['email'],
-    $_POST['district'],
-    $_POST['address'],
-    $_POST['activated'],
-    $_POST['point'],
+    $_POST['user_account'],
+    $_POST['order_number'],
+    $_POST['order_original_amount'],
+    $_POST['discount_type'],
+    $_POST['order_final_amount'],
+    $_POST['status'],
     $_POST['sid'],
 ]);
 
