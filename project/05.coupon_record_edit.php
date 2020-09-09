@@ -67,18 +67,18 @@ if (empty($row)) {
 
                         <div class="form-group">
                             <label for="order_number"><span class="red-stars">**</span>order_number</label>
-                            <input type="text" class="form-control" id="order_number" name="order_number" value="<?= htmlentities($row['order_number']) ?>">
+                            <input type="text" class="form-control" id="order_number" name="order_number" required value="<?= htmlentities($row['order_number']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
-                            <label for="order_original_amount"><span class="red-stars">**</span>order_original_amount</label>
+                            <label for="order_original_amount">order_original_amount</label>
                             <input type="text" class="form-control" id="order_original_amount" name="order_original_amount" value="<?= htmlentities($row['order_original_amount']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
-                            <label for="discount_type"><span class="red-stars">**</span>discount_type</label>
+                            <label for="discount_type">discount_type</label>
                             <input type="text" class="form-control" id="discount_type" name="discount_type" value="<?= htmlentities($row['discount_type']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
@@ -89,7 +89,7 @@ if (empty($row)) {
                         </div>
 
                         <div class="form-group">
-                            <label for="status"><span class="red-stars">**</span>status</label>
+                            <label for="status">status</label>
                             <input type="text" class="form-control" id="status" name="status" value="<?= htmlentities($row['status']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>

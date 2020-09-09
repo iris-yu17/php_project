@@ -111,6 +111,7 @@ require __DIR__ . '/parts/__.connect_db.php';
 
         // 如果通過的話就發送
         if (isPass) {
+
             // Form: 表單，有外觀
             // FormData: 沒有外觀的表單
             // 找form1，把裡面的值塞到FormData
@@ -132,7 +133,6 @@ require __DIR__ . '/parts/__.connect_db.php';
                 });
                 */
                 
-
 
                 .then(r => r.json())
                 .then(obj => {
