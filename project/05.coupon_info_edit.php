@@ -66,14 +66,14 @@ if (empty($row)) {
                         </div>
 
                         <div class="form-group">
-                            <label for="coupon_type"><span class="red-stars">**</span>coupon_type</label>
-                            <input type="text" class="form-control" id="coupon_type" name="coupon_type" required value="<?= htmlentities($row['coupon_type']) ?>">
+                            <label for="coupon_type">coupon_type</label>
+                            <input type="text" class="form-control" id="coupon_type" name="coupon_type" value="<?= htmlentities($row['coupon_type']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
-                            <label for="coupon_validity"><span class="red-stars">**</span>coupon_validity</label>
-                            <input type="text" class="form-control" id="coupon_validity" name="coupon_validity" required value="<?= htmlentities($row['coupon_validity']) ?>">
+                            <label for="coupon_validity">coupon_validity</label>
+                            <input type="text" class="form-control" id="coupon_validity" name="coupon_validity" value="<?= htmlentities($row['coupon_validity']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
