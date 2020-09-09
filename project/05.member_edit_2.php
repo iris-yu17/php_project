@@ -1,7 +1,31 @@
 <?php
-$page_title = '新增資料';
-$page_name = "data_insert";
+$page_title = '編輯資料';
+$page_name = 'data_edit';
 require __DIR__ . '/parts/__.connect_db.php';
+
+// 前面會傳sid值過來(01.member_list.php line119)，判斷有沒有這個值
+// 有的話就用sid，沒有就給0
+$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
+
+// 如果是0就不做了，轉到01.member_list.php
+// empty()，若是0,"",[],會拿到true
+if (empty($sid)) {
+    header('Location: 01.member_list.php');
+    exit;
+}
+
+// 直接把$sid值放進來(前面intval已轉成數字)
+$sql = "SELECT * FROM member_list WHERE sid=$sid";
+
+$row = $pdo->query($sql)->fetch();
+
+// 如果是空的就不做了，轉到01.member_list.php
+if (empty($row)) {
+    header('Location: 01.member_list.php');
+    exit;
+}
+
+
 ?>
 
 <?php include __DIR__ . '/parts/__html_head.php' ?>
@@ -28,72 +52,73 @@ require __DIR__ . '/parts/__.connect_db.php';
 
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">新增資料</h5>
+                    <h5 class="card-title">編輯資料</h5>
 
                     <!-- return flase送不出去 -->
-                    <form name="form1" onsubmit="checkForm(); return false;">
+                    <form name="form1" onsubmit="checkForm(); return false;" novalidate>
+                    <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
                         <div class="form-group">
                             <!-- label的for是對應input的id -->
                             <!-- 沒有name就不會送出 -->
                             <label for="account"><span class="red-stars">**</span>account</label>
-                            <input type="text" class="form-control" id="account" name="account" required>
+                            <input type="text" class="form-control" id="account" name="account" required value="<?= htmlentities($row['account']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
                             <label for="password"><span class="red-stars">**</span>password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
+                            <input type="password" class="form-control" id="password" name="password" required value="<?= htmlentities($row['password']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
                             <label for="family_name"><span class="red-stars">**</span>family_name</label>
-                            <input type="text" class="form-control" id="family_name" name="family_name" required>
+                            <input type="text" class="form-control" id="family_name" name="family_name" required value="<?= htmlentities($row['family_name']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
                             <label for="given_name"><span class="red-stars">**</span>given_name</label>
-                            <input type="text" class="form-control" id="given_name" name="given_name" required>
+                            <input type="text" class="form-control" id="given_name" name="given_name" required value="<?= htmlentities($row['given_name']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
                             <label for="birthday">birthday</label>
-                            <input type="date" class="form-control" id="birthday" name="birthday">
+                            <input type="date" class="form-control" id="birthday" name="birthday" value="<?= htmlentities($row['birthday']) ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="mobile"><span class="red-stars">**</span>mobile</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile" required>
+                            <input type="text" class="form-control" id="mobile" name="mobile" required value="<?= htmlentities($row['mobile']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
                             <label for="email">email</label>
-                            <input type="text" class="form-control" id="email" name="email">
+                            <input type="text" class="form-control" id="email" name="email" value="<?= htmlentities($row['email']) ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="district"><span class="red-stars">**</span>district</label>
-                            <input type="text" class="form-control" id="district" name="district" required>
+                            <input type="text" class="form-control" id="district" name="district" required value="<?= htmlentities($row['district']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
                             <label for="address">address</label>
-                            <input type="text" class="form-control" id="address" name="address">
+                            <input type="text" class="form-control" id="address" name="address" value="<?= htmlentities($row['address']) ?>">
                         </div>
 
 
                         <div class="form-group">
                             <label for="activated">activated</label>
-                            <input type="text" class="form-control" id="activated" name="activated">
+                            <input type="text" class="form-control" id="activated" name="activated" value="<?= htmlentities($row['activated']) ?>">
                         </div>
 
                         <div class="form-group">
                             <label for="point">point</label>
-                            <input type="text" class="form-control" id="point" name="point">
+                            <input type="text" class="form-control" id="point" name="point" value="<?= htmlentities($row['point']) ?>">
                         </div>
 
 
@@ -150,13 +175,11 @@ require __DIR__ . '/parts/__.connect_db.php';
 
         // 如果通過的話就發送
         if (isPass) {
-            // Form: 表單，有外觀
-            // FormData: 沒有外觀的表單
             // 找form1，把裡面的值塞到FormData
             const fd = new FormData(document.form1);
 
             // 發給02.member_data_insert_api.php
-            fetch('02.member_data_insert_api.php', {
+            fetch('06.member_data_edit_api.php', {
                     method: 'POST',
                     // body是要送的資料
                     body: fd
@@ -177,7 +200,7 @@ require __DIR__ . '/parts/__.connect_db.php';
                     console.log(obj);
                     if (obj.success) {
                         infobar.innerHTML = '新增成功';
-                        if(infobar.classList.contains('alert-danger')){
+                        if (infobar.classList.contains('alert-danger')) {
                             infobar.classList.replace('alert-danger', 'alert-success')
                         }
                         setTimeout(() => {
@@ -185,7 +208,7 @@ require __DIR__ . '/parts/__.connect_db.php';
                         }, 3000)
                     } else {
                         infobar.innerHTML = obj.error || '新增失敗';
-                        if(infobar.classList.contains('alert-success')){
+                        if (infobar.classList.contains('alert-success')) {
                             infobar.classList.replace('alert-success', 'alert-danger')
                         }
                         submitBtn.style.display = 'block';

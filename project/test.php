@@ -11,15 +11,6 @@ $output = [
     'error' => ''
 ];
 
-// 檢查
-// 如果沒有sid
-if(empty($_POST['sid'])){
-    $output['code'] = 405;
-    $output['error'] = '沒有 sid';
-    echo json_encode($output, JSON_UNESCAPED_UNICODE);
-    exit;
-}
-
 // 檢查格式
 if(mb_strlen($_POST['account'])<8){
     $output['code'] = 410;
@@ -37,22 +28,14 @@ if(! preg_match('/^09\d{2}-?\d{3}-?\d{3}$/', $_POST['mobile'])){
     exit;
 }
 
-
-// sid不可改，用來判斷，放where
-$sql = "UPDATE `member_list` SET 
-`account`=?,
-`password`=?,
-`family_name`=?,
-`given_name`=?,
-`birthday`=?,
-`mobile`=?,
-`email`=?,
-`district`=?,
-`address`=?,
-`activated`=?,
-`point`=? 
-WHERE `sid`=?";
-
+// 新增的時候不用給sid
+// VALUE: 從外面來的用問號，NOW()是SQLfunction，用當下時間
+$sql = "INSERT INTO `member_list`(
+    `account`, `password`, `family_name`, 
+    `given_name`, `birthday`, `mobile`,
+    `email`, `district`, `address`, 
+    `created_at`, `activated`, `point`
+    ) VALUES (?,?,?,?,?,?,?,?,?,NOW(),?,?)";
 // PREPARE準備
 // 會拿到一個PDOstatement物件
 $stmt = $pdo->prepare($sql);
@@ -69,19 +52,15 @@ $stmt->execute([
     $_POST['address'],
     $_POST['activated'],
     $_POST['point'],
-    $_POST['sid'],
 ]);
-
 
 // 算有幾個Row(輸入幾筆資料)
 // echo $stmt->rowCount();
 // echo 'ok';
 
-
-// 如果有修改
+// 如果有新增成功
 if($stmt->rowCount()){
     $output['success'] = true;
 }
-
 // 把$output送出去，用JSON格式
 echo json_encode($output, JSON_UNESCAPED_UNICODE);

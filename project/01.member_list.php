@@ -116,7 +116,7 @@ if ($totalRows > 0) {
                     <td><?= $r['activated'] ?></td>
                     <td><?= $r['point'] ?></td>
                     <!-- edit: 給primary值 -->
-                    <td><a href="05.member_edit.php?sid=<?= $r['sid']  ?>"><i class="fas fa-edit"></i></a></td>
+                    <td><a href="05.member_edit_2.php?sid=<?= $r['sid']  ?>"><i class="fas fa-edit"></i></a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
