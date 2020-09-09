@@ -103,7 +103,8 @@ if ($totalRows > 0) {
                     <td><?= $r['discount_type'] ?></td>
                     <td><?= $r['order_final_amount'] ?></td>
                     <td><?= $r['status'] ?></td>
-                    <td><a href="#"><i class="fas fa-edit"></i></a></td>
+                    <!-- edit: 給primary值 -->
+                    <td><a href="05.coupon_record_edit.php?sid=<?= $r['sid']  ?>"><i class="fas fa-edit"></i></a></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

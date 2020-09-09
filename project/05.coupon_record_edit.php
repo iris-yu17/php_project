@@ -1,6 +1,6 @@
 <?php
-$page_title = '編輯資料';
-$page_name = 'data_edit';
+$page_title = '編輯優惠券紀錄';
+$page_name = 'coupon_record_edit';
 require __DIR__ . '/parts/__.connect_db.php';
 
 // 前面會傳sid值過來(01.member_list.php line119)，判斷有沒有這個值

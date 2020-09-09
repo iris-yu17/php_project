@@ -1,27 +1,27 @@
 <?php
-$page_title = '編輯會員資料';
-$page_name = 'data_edit';
+$page_title = '編輯折價券資料';
+$page_name = 'coupon_info_edit';
 require __DIR__ . '/parts/__.connect_db.php';
 
 // 前面會傳sid值過來(01.member_list.php line119)，判斷有沒有這個值
 // 有的話就用sid，沒有就給0
 $sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
 
-// 如果是0就不做了，轉到01.member_list.php
+// 如果是0就不做了，轉到01.coupon_info.php
 // empty()，若是0,"",[],會拿到true
 if (empty($sid)) {
-    header('Location: 01.member_list.php');
+    header('Location: 01.coupon_info.php');
     exit;
 }
 
 // 直接把$sid值放進來(前面intval已轉成數字)
-$sql = "SELECT * FROM member_list WHERE sid=$sid";
+$sql = "SELECT * FROM coupon_info WHERE sid=$sid";
 
 $row = $pdo->query($sql)->fetch();
 
-// 如果是空的就不做了，轉到01.member_list.php
+// 如果是空的就不做了，轉到01.coupon_info.php
 if (empty($row)) {
-    header('Location: 01.member_list.php');
+    header('Location: 01.coupon_info.php');
     exit;
 }
 
@@ -52,7 +52,7 @@ if (empty($row)) {
 
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">編輯會員資料</h5>
+                    <h5 class="card-title">編輯折價券資料</h5>
 
                     <!-- return flase送不出去 -->
                     <form name="form1" onsubmit="checkForm(); return false;" novalidate>
@@ -60,66 +60,30 @@ if (empty($row)) {
                         <div class="form-group">
                             <!-- label的for是對應input的id -->
                             <!-- 沒有name就不會送出 -->
-                            <label for="account"><span class="red-stars">**</span>account</label>
-                            <input type="text" class="form-control" id="account" name="account" required value="<?= htmlentities($row['account']) ?>">
+                            <label for="coupon_no"><span class="red-stars">**</span>coupon_no</label>
+                            <input type="text" class="form-control" id="coupon_no" name="coupon_no" required value="<?= htmlentities($row['coupon_no']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
-                            <label for="password"><span class="red-stars">**</span>password</label>
-                            <input type="password" class="form-control" id="password" name="password" required value="<?= htmlentities($row['password']) ?>">
+                            <label for="coupon_type"><span class="red-stars">**</span>coupon_type</label>
+                            <input type="text" class="form-control" id="coupon_type" name="coupon_type" required value="<?= htmlentities($row['coupon_type']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
-                            <label for="family_name"><span class="red-stars">**</span>family_name</label>
-                            <input type="text" class="form-control" id="family_name" name="family_name" required value="<?= htmlentities($row['family_name']) ?>">
+                            <label for="coupon_validity"><span class="red-stars">**</span>coupon_validity</label>
+                            <input type="text" class="form-control" id="coupon_validity" name="coupon_validity" required value="<?= htmlentities($row['coupon_validity']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
                         <div class="form-group">
-                            <label for="given_name"><span class="red-stars">**</span>given_name</label>
-                            <input type="text" class="form-control" id="given_name" name="given_name" required value="<?= htmlentities($row['given_name']) ?>">
+                            <label for="user_account"><span class="red-stars">**</span>user_account</label>
+                            <input type="text" class="form-control" id="user_account" name="user_account" required value="<?= htmlentities($row['user_account']) ?>">
                             <small class="form-text error-msg"></small>
                         </div>
 
-                        <div class="form-group">
-                            <label for="birthday">birthday</label>
-                            <input type="date" class="form-control" id="birthday" name="birthday" value="<?= htmlentities($row['birthday']) ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="mobile"><span class="red-stars">**</span>mobile</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile" required value="<?= htmlentities($row['mobile']) ?>">
-                            <small class="form-text error-msg"></small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">email</label>
-                            <input type="text" class="form-control" id="email" name="email" value="<?= htmlentities($row['email']) ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="district"><span class="red-stars">**</span>district</label>
-                            <input type="text" class="form-control" id="district" name="district" required value="<?= htmlentities($row['district']) ?>">
-                            <small class="form-text error-msg"></small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="address">address</label>
-                            <input type="text" class="form-control" id="address" name="address" value="<?= htmlentities($row['address']) ?>">
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="activated">activated</label>
-                            <input type="text" class="form-control" id="activated" name="activated" value="<?= htmlentities($row['activated']) ?>">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="point">point</label>
-                            <input type="text" class="form-control" id="point" name="point" value="<?= htmlentities($row['point']) ?>">
-                        </div>
+                        
 
 
 
@@ -140,11 +104,12 @@ if (empty($row)) {
 </div>
 <?php include __DIR__ . '/parts/__scripts.php' ?>
 <script>
+
     // 正確格式
-    const mobile_pattern = /^09\d{2}-?\d{3}-?\d{3}$/;
-    const $account = document.querySelector('#account');
-    const $mobile = document.querySelector('#mobile');
-    const r_fields = [$account, $mobile];
+    // const mobile_pattern = /^09\d{2}-?\d{3}-?\d{3}$/;
+    const $user_account = document.querySelector('#user_account');
+    // const $mobile = document.querySelector('#mobile');
+    const r_fields = [$user_account];
     const infobar = document.querySelector('#infobar');
 
 
@@ -152,24 +117,28 @@ if (empty($row)) {
         // 檢查:預設true，只要1個欄位沒通過檢查，就變false
         let isPass = true;
 
+
         // 回復原來的狀態
         r_fields.forEach(el => {
             el.style.borderColor = '#CCCCCC';
             el.nextElementSibling.innerHTML = '';
         });
 
-        // 檢查資料格式
-        if ($account.value.length < 8) {
-            isPass = false;
-            $account.style.borderColor = 'red';
-            $account.nextElementSibling.innerHTML = '帳號需大於8碼';
-        }
 
+
+        // 檢查資料格式
+        if ($user_account.value.length < 8) {
+            isPass = false;
+            $user_account.style.borderColor = 'red';
+            $user_account.nextElementSibling.innerHTML = 'user account大於8碼';
+        }
+/*
         if (!mobile_pattern.test($mobile.value)) {
             isPass = false;
             $mobile.style.borderColor = 'red';
             $mobile.nextElementSibling.innerHTML = '請填寫正確的手機號碼';
         }
+*/
 
 
 
@@ -178,8 +147,8 @@ if (empty($row)) {
             // 找form1，把裡面的值塞到FormData
             const fd = new FormData(document.form1);
 
-            // 發給06.member_data_edit_api.php
-            fetch('06.member_data_edit_api.php', {
+            // 發給06.coupon_info_edit_api.php
+            fetch('06.coupon_info_edit_api.php', {
                     method: 'POST',
                     // body是要送的資料
                     body: fd
@@ -204,7 +173,7 @@ if (empty($row)) {
                             infobar.classList.replace('alert-danger', 'alert-success')
                         }
                         setTimeout(() => {
-                            location.href = '01.member_list.php';
+                            location.href = '01.coupon_info.php';
                         }, 3000)
                     } else {
                         infobar.innerHTML = obj.error || '編輯失敗';
