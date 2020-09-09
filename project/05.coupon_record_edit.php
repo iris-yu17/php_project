@@ -56,7 +56,14 @@ if (empty($row)) {
 
                     <!-- return flase送不出去 -->
                     <form name="form1" onsubmit="checkForm(); return false;" novalidate>
-                    <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
+                        <input type="hidden" name="sid" value="<?= $row['sid'] ?>">
+
+                        <div class="form-group">
+                            <label for="coupon_no"><span class="red-stars">**</span>coupon_no</label>
+                            <input type="text" class="form-control" id="coupon_no" name="coupon_no" required value="<?= htmlentities($row['coupon_no']) ?>">
+                            <small class="form-text error-msg"></small>
+                        </div>
+
                         <div class="form-group">
                             <!-- label的for是對應input的id -->
                             <!-- 沒有name就不會送出 -->
@@ -135,13 +142,13 @@ if (empty($row)) {
             $user_account.style.borderColor = 'red';
             $user_account.nextElementSibling.innerHTML = 'user account大於8碼';
         }
-/*
-        if (!discount_type_pattern.test($discount_type.value)) {
-            isPass = false;
-            $discount_type.style.borderColor = 'red';
-            $discount_type.nextElementSibling.innerHTML = '請填寫正確的手機號碼';
-        }
-*/
+        /*
+                if (!discount_type_pattern.test($discount_type.value)) {
+                    isPass = false;
+                    $discount_type.style.borderColor = 'red';
+                    $discount_type.nextElementSibling.innerHTML = '請填寫正確的手機號碼';
+                }
+        */
 
 
 

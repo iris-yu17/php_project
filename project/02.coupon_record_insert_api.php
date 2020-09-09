@@ -34,15 +34,17 @@ if(! preg_match('/^09\d{2}-?\d{3}-?\d{3}$/', $_POST['mobile'])){
 // 新增的時候不用給sid
 // VALUE: 從外面來的用問號，NOW()是SQLfunction，用當下時間
 $sql = "INSERT INTO `coupon_record`(
-    `user_account`, `order_number`, `order_original_amount`, 
-    `discount_type`, `order_final_amount`, `status`) VALUES (
-    ?,?,?,?,?,?)";
+    `coupon_no`,`user_account`, `order_number`, 
+    `order_original_amount`, `discount_type`, `order_final_amount`, 
+    `status`) VALUES (
+    ?,?,?,?,?,?,?)";
 
 // PREPARE準備
 // 會拿到一個PDOstatement物件
 $stmt = $pdo->prepare($sql);
 // 執行
 $stmt->execute([
+    $_POST['coupon_no'],
     $_POST['user_account'],
     $_POST['order_number'],
     $_POST['order_original_amount'],

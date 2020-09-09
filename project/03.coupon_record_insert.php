@@ -30,6 +30,13 @@ require __DIR__ . '/parts/__.connect_db.php';
 
                     <!-- return flase送不出去 -->
                     <form name="form1" onsubmit="checkForm(); return false;">
+
+                        <div class="form-group">
+                            <label for="coupon_no"><span class="red-stars">**</span>coupon_no</label>
+                            <input type="text" class="form-control" id="coupon_no" name="coupon_no">
+                            <small class="form-text error-msg"></small>
+                        </div>
+
                         <div class="form-group">
                             <!-- label的for是對應input的id -->
                             <!-- 沒有name就不會送出 -->
@@ -106,39 +113,39 @@ require __DIR__ . '/parts/__.connect_db.php';
             $user_account.nextElementSibling.innerHTML = 'user account需大於8碼';
         }
 
-/*
-        if (!mobile_pattern.test($mobile.value)) {
-            isPass = false;
-            $mobile.style.borderColor = 'red';
-            $mobile.nextElementSibling.innerHTML = '請填寫正確的手機號碼';
-        }
-*/
+        /*
+                if (!mobile_pattern.test($mobile.value)) {
+                    isPass = false;
+                    $mobile.style.borderColor = 'red';
+                    $mobile.nextElementSibling.innerHTML = '請填寫正確的手機號碼';
+                }
+        */
 
 
 
         // 如果通過的話就發送
         if (isPass) {
 
-        // Form: 表單，有外觀
-        // FormData: 沒有外觀的表單
-        // 找form1，把裡面的值塞到FormData
-        const fd = new FormData(document.form1);
+            // Form: 表單，有外觀
+            // FormData: 沒有外觀的表單
+            // 找form1，把裡面的值塞到FormData
+            const fd = new FormData(document.form1);
 
-        // 發給02.coupon_record_insert_api.php
-        fetch('02.coupon_record_insert_api.php', {
-                method: 'POST',
-                // body是要送的資料
-                body: fd
-            })
+            // 發給02.coupon_record_insert_api.php
+            fetch('02.coupon_record_insert_api.php', {
+                    method: 'POST',
+                    // body是要送的資料
+                    body: fd
+                })
 
-            /*
-                // 傳字串用text
-                .then(r => r.text())
-                // 
-                .then(str => {
-                    console.log(str);
-                });*/
-                
+                /*
+                    // 傳字串用text
+                    .then(r => r.text())
+                    // 
+                    .then(str => {
+                        console.log(str);
+                    });*/
+
 
 
                 .then(r => r.json())
@@ -146,15 +153,15 @@ require __DIR__ . '/parts/__.connect_db.php';
                     console.log(obj);
                     if (obj.success) {
                         infobar.innerHTML = '新增成功';
-                        if(infobar.classList.contains('alert-danger')){
+                        if (infobar.classList.contains('alert-danger')) {
                             infobar.classList.replace('alert-danger', 'alert-success')
                         }
                         setTimeout(() => {
-                            location.href = '01.member_list.php';
+                            location.href = '01.coupon_record.php';
                         }, 3000)
                     } else {
                         infobar.innerHTML = obj.error || '新增失敗';
-                        if(infobar.classList.contains('alert-success')){
+                        if (infobar.classList.contains('alert-success')) {
                             infobar.classList.replace('alert-success', 'alert-danger')
                         }
                         submitBtn.style.display = 'block';
@@ -163,7 +170,7 @@ require __DIR__ . '/parts/__.connect_db.php';
                 });
         }
 
-        
+
     }
 </script>
 

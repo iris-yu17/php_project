@@ -81,6 +81,7 @@ if ($totalRows > 0) {
             <tr>
                 <th scope="col"><i class="fas fa-trash-alt"></i></th>
                 <th scope="col">#</th>
+                <th scope="col">coupon_no</th>
                 <th scope="col">user_account</th>
                 <th scope="col">order_number</th>
                 <th scope="col">order_original_amount</th>
@@ -97,6 +98,7 @@ if ($totalRows > 0) {
                 <!-- 按刪除連到04.data_delete.php -->
                 <td><a href="04.coupon_record_delete.php?sid=<?= $r['sid']  ?>"><i class="fas fa-trash-alt"></i></a></td>
                     <td><?= $r['sid'] ?></td>
+                    <td><?= $r['coupon_no'] ?></td>
                     <td><?= $r['user_account'] ?></td>
                     <td><?= $r['order_number'] ?></td>
                     <td><?= $r['order_original_amount'] ?></td>

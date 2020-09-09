@@ -42,6 +42,7 @@ if(! preg_match('/^09\d{2}-?\d{3}-?\d{3}$/', $_POST['mobile'])){
 
 // sid不可改，用來判斷，放where
 $sql = "UPDATE `coupon_record` SET 
+`coupon_no`=?,
 `user_account`=?,
 `order_number`=?,
 `order_original_amount`=?,
@@ -55,6 +56,7 @@ WHERE `sid`=?";
 $stmt = $pdo->prepare($sql);
 // 執行
 $stmt->execute([
+    $_POST['coupon_no'],
     $_POST['user_account'],
     $_POST['order_number'],
     $_POST['order_original_amount'],

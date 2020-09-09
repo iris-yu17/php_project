@@ -143,7 +143,7 @@ require __DIR__ . '/parts/__.connect_db.php';
                             infobar.classList.replace('alert-danger', 'alert-success')
                         }
                         setTimeout(() => {
-                            location.href = '01.member_list.php';
+                            location.href = '01.coupon_info.php';
                         }, 3000)
                     } else {
                         infobar.innerHTML = obj.error || '新增失敗';
