@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2020-09-07 17:56:45
+-- 產生時間： 2020-09-10 04:11:33
 -- 伺服器版本： 10.4.13-MariaDB
 -- PHP 版本： 7.3.20
 
@@ -48,11 +48,11 @@ CREATE TABLE `member_list` (
 --
 
 INSERT INTO `member_list` (`sid`, `account`, `password`, `family_name`, `given_name`, `birthday`, `mobile`, `email`, `district`, `address`, `created_at`, `activated`, `point`) VALUES
-(1, 'kate1234', '7c4a8d09ca3762af61e59520943dc26494f8941b', '林', '凱特', '1990-04-07', '0910123456', 'kate.lin1234@test.com', '信義區', '忠孝東路一段50號', '2020-09-02 06:41:17', 0, NULL),
-(2, 'shane1234', 'f18f057ea44a945a083a00e6fcc11637d186042d', '李', '尚恩', '1995-11-02', '0953000123', 'shane.lee1234@test.com', '信義區', '辛亥路三段58號', '2020-09-02 06:41:17', 0, NULL),
-(3, 'adam1234', '13e475c8ed2fab89e42c5bb86f472ddff0672754', '蘇', '亞當', '1997-09-01', '0928456456', 'adam.su1234@test.com', '大安區', '濟南路二段178號', '2020-09-02 06:47:46', 0, NULL),
-(4, 'arron1234', '1234', '張', '亞倫', '1998-08-08', '0910111234', 'arron.chang1234@test.com', '大安區', 'xx路xx號', '2020-09-07 15:05:34', 1, 0),
-(5, 'eddie1234', '54321', '李', '艾迪', '1996-02-01', '0910123456', 'eddie.lee1234@test.com', '大安區', 'xx路xx號', '2020-09-07 15:13:05', 1, 0);
+(1, 'kate1234', '69c5fcebaa65b560eaf06c3fbeb481ae44b8d618', '林', '凱特', '1990-04-07', '0910123456', 'kate.lin1234@test.com', '信義區', '忠孝東路一段50號', '2020-09-02 06:41:17', 0, 0),
+(2, 'shane1234', '90c888d1292ded4bda4f1e190c32043fcfc3a254', '李', '尚恩', '1995-11-02', '0953000123', 'shane.lee1234@test.com', '信義區', '辛亥路三段58號', '2020-09-02 06:41:17', 0, 0),
+(3, 'adam1234', '08a9e07837b9bde0bf5adcd6e08bfd31632e74e3', '蘇', '亞當', '1997-09-01', '0928456456', 'adam.su1234@test.com', '大安區', '濟南路二段178號', '2020-09-02 06:47:46', 0, 0),
+(4, 'arron1234', '1234', '張', '亞倫', '1998-08-08', '0910111234', 'arron.chang1234@test.com', '大安區', 'xx路xx號', '2020-09-07 15:05:34', 1, 10),
+(5, 'eddie1234', '5b1d5b1569de26f631ba3edf0d89f65be5af4e3d', '李', '艾迪', '1996-02-01', '0910123456', 'eddie.lee1234@test.com', '大安區', 'xx路xx號', '2020-09-07 15:13:05', 1, 80);
 
 --
 -- 已傾印資料表的索引
@@ -63,8 +63,7 @@ INSERT INTO `member_list` (`sid`, `account`, `password`, `family_name`, `given_n
 --
 ALTER TABLE `member_list`
   ADD PRIMARY KEY (`sid`),
-  ADD UNIQUE KEY `password` (`password`),
-  ADD KEY `account` (`account`);
+  ADD UNIQUE KEY `account` (`account`) USING BTREE;
 
 --
 -- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
@@ -74,7 +73,7 @@ ALTER TABLE `member_list`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `member_list`
 --
 ALTER TABLE `member_list`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
