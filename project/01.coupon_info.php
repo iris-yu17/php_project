@@ -36,10 +36,16 @@ if ($totalRows > 0) {
 ?>
 
 <?php include __DIR__ . '/parts/__html_head.php' ?>
+<style>
+    .col_pagination {
+        flex-grow: 0;
+
+    }
+</style>
 <?php include __DIR__ . '/parts/__navbar.php' ?>
 <div class="container">
-    <div class="row">
-        <div class="col">
+    <div class="row justify-content-center">
+        <div class="col_pagination">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
 

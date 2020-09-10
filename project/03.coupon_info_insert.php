@@ -17,7 +17,7 @@ require __DIR__ . '/parts/__.connect_db.php';
 
 <?php include __DIR__ . '/parts/__navbar.php' ?>
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-lg-6">
 
             <!-- 增新成功/失敗alert -->
@@ -25,7 +25,7 @@ require __DIR__ . '/parts/__.connect_db.php';
                 A simple success alert—check it out!
             </div>
 
-            
+
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">新增資料</h5>
@@ -99,13 +99,13 @@ require __DIR__ . '/parts/__.connect_db.php';
             $user_account.nextElementSibling.innerHTML = 'user account需大於8碼';
         }
 
-/*
-        if (!mobile_pattern.test($mobile.value)) {
-            isPass = false;
-            $mobile.style.borderColor = 'red';
-            $mobile.nextElementSibling.innerHTML = '請填寫正確的手機號碼';
-        }
-*/
+        /*
+                if (!mobile_pattern.test($mobile.value)) {
+                    isPass = false;
+                    $mobile.style.borderColor = 'red';
+                    $mobile.nextElementSibling.innerHTML = '請填寫正確的手機號碼';
+                }
+        */
 
 
 
@@ -123,7 +123,7 @@ require __DIR__ . '/parts/__.connect_db.php';
                     // body是要送的資料
                     body: fd
                 })
-                
+
                 /*
                 // 傳字串用text
                 .then(r => r.text())
@@ -132,14 +132,14 @@ require __DIR__ . '/parts/__.connect_db.php';
                     console.log(str);
                 });
                 */
-                
+
 
                 .then(r => r.json())
                 .then(obj => {
                     console.log(obj);
                     if (obj.success) {
                         infobar.innerHTML = '新增成功';
-                        if(infobar.classList.contains('alert-danger')){
+                        if (infobar.classList.contains('alert-danger')) {
                             infobar.classList.replace('alert-danger', 'alert-success')
                         }
                         setTimeout(() => {
@@ -147,7 +147,7 @@ require __DIR__ . '/parts/__.connect_db.php';
                         }, 3000)
                     } else {
                         infobar.innerHTML = obj.error || '新增失敗';
-                        if(infobar.classList.contains('alert-success')){
+                        if (infobar.classList.contains('alert-success')) {
                             infobar.classList.replace('alert-success', 'alert-danger')
                         }
                         submitBtn.style.display = 'block';
@@ -157,7 +157,7 @@ require __DIR__ . '/parts/__.connect_db.php';
         }
 
 
-        }
+    }
 </script>
 
 <?php include __DIR__ . '/parts/__html_foot.php' ?>

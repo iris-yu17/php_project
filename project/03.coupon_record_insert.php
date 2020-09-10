@@ -16,7 +16,7 @@ require __DIR__ . '/parts/__.connect_db.php';
 </style>
 <?php include __DIR__ . '/parts/__navbar.php' ?>
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-lg-6">
             <!-- 增新成功/失敗alert -->
             <div id="infobar" class="alert alert-success" role="alert" style="display: none">

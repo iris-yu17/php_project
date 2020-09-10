@@ -36,10 +36,16 @@ if ($totalRows > 0) {
 ?>
 
 <?php include __DIR__ . '/parts/__html_head.php' ?>
+<style>
+    .col_pagination {
+        flex-grow: 0;
+
+    }
+</style>
 <?php include __DIR__ . '/parts/__navbar.php' ?>
 <div class="container">
-    <div class="row">
-        <div class="col">
+    <div class="row justify-content-center">
+        <div class="col_pagination">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
 
@@ -95,8 +101,8 @@ if ($totalRows > 0) {
             <!-- foreach(要查看的對象 as $key => $value) -->
             <?php foreach ($rows as $r) : ?>
                 <tr>
-                <!-- 按刪除連到04.data_delete.php -->
-                <td><a href="04.coupon_record_delete.php?sid=<?= $r['sid']  ?>"><i class="fas fa-trash-alt"></i></a></td>
+                    <!-- 按刪除連到04.data_delete.php -->
+                    <td><a href="04.coupon_record_delete.php?sid=<?= $r['sid']  ?>"><i class="fas fa-trash-alt"></i></a></td>
                     <td><?= $r['sid'] ?></td>
                     <td><?= $r['coupon_no'] ?></td>
                     <td><?= $r['user_account'] ?></td>

@@ -17,7 +17,7 @@ require __DIR__ . '/parts/__.connect_db.php';
 
 <?php include __DIR__ . '/parts/__navbar.php' ?>
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-lg-6">
 
             <!-- 增新成功/失敗alert -->
@@ -177,7 +177,7 @@ require __DIR__ . '/parts/__.connect_db.php';
                     console.log(obj);
                     if (obj.success) {
                         infobar.innerHTML = '新增成功';
-                        if(infobar.classList.contains('alert-danger')){
+                        if (infobar.classList.contains('alert-danger')) {
                             infobar.classList.replace('alert-danger', 'alert-success')
                         }
                         setTimeout(() => {
@@ -185,7 +185,7 @@ require __DIR__ . '/parts/__.connect_db.php';
                         }, 3000)
                     } else {
                         infobar.innerHTML = obj.error || '新增失敗';
-                        if(infobar.classList.contains('alert-success')){
+                        if (infobar.classList.contains('alert-success')) {
                             infobar.classList.replace('alert-success', 'alert-danger')
                         }
                         submitBtn.style.display = 'block';
